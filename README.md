@@ -1,7 +1,4 @@
-# WE532 Web Security and Information System Security
+# WE644 Special Topics in Technology of Mobile Application Development
 
 Week 1
-  - Introduction
-
-Week 2
-  - Attack & Basic Cryptography : Caesar Cipher
+  - Introduction, Intent Event ( Click )
