@@ -1,2 +1,7 @@
-# รวม Files ต่าง ๆ ในการเรียนการสอนและการบ้าน
-Web Engineering and Mobile Application Development @ DPU Lesson and Homework Files
+# WE532 
+
+Week 1
+  - Introduction
+
+Week 2
+  - Attack & Basic Cryptography : Caesar Cipher
