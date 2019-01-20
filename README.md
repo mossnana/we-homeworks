@@ -1,4 +1,4 @@
-# WE532 
+# WE532 Web Security and Information System Security
 
 Week 1
   - Introduction
