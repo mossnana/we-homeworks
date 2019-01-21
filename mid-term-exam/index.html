@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/all.css">
+  <script src="js/fontawesome.min.js"></script>
+  <!-- Backup URL
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+-->
+
+<title>Hello, world!</title>
+<style>
+
+@font-face { font-family: 'Mali';
+src: url('fonts/Muli-Regular.ttf');
+ }
+
+body {
+    font-family: 'Mali';
+}
+
+@media screen and (min-width:1024px) {
+  .nav-link {
+    margin-left: 50px!important;
+  }
+  .card-img-top {
+    height: 200px;
+  }
+
+}
+
+@media screen and (max-width:1024px) and (min-width:768px) {
+  .nav-link {
+    margin-left: 50px!important;
+  }
+  .card-img-top {
+    height: 120px;
+  }
+  .xxx {
+    font-size: 12px;
+  }
+  .card {
+    height: 350px!important;
+  }
+  .rounded-circle{
+    border-radius: 50%!important;
+    width: 150px!important;
+    height: 150px!important;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width:767px){
+  .navbar {
+    background-color: #343a40!important;
+  }
+
+  .x {
+    font-size: 20px!important;
+  }
+
+  .card {
+    height: 350px!important;
+    margin: 10px;
+  }
+  .rounded-circle{
+    border-radius: 50%!important;
+    width: 200px!important;
+    height: 200px!important;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .card-img-top {
+    height: 150px;
+  }
+}
+
+.navbar-toggler {
+  background-color: #343a40;
+}
+
+.x {
+  font-size: 50px;
+}
+
+.navbar-brand {
+  color:white!important;
+}
+
+.nav-link {
+  color:white!important;
+}
+
+.nav-link {
+  margin-left: 0px;
+}
+
+.header {
+  background-size: cover;
+}
+.navbar {
+  position: absolute;
+  z-index:10;
+  width: 100%;
+}
+.carousel {
+  z-index:5;
+}
+
+.rounded-circle{
+  border-radius: 50%!important;
+  width: 200px;
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+ .card {
+   height: 400px;
+   margin: 10px;
+ }
+
+ .noBorder{
+   border: none;
+ }
+
+.text-muted {
+  color: rgb(204, 204, 204)!important;
+}
+
+.link-more {
+  color: rgb(255, 95, 95)!important;
+}
+
+.link-more:hover {
+  color: rgb(0, 0, 204)!important;
+  text-transform:none!important;
+}
+
+.footer {
+  background-color: rgb(44, 46, 62) ;
+}
+
+.footer-text{
+  color: white;
+}
+</style>
+</head>
+
+<body>
+  <!-- header image -->
+  <div>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Voyage</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tours</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <header>
+    <div>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="images/bg_2.jpg" alt="First slide">
+            <div class="carousel-caption d-flex align-items-left">
+                <h5 class="x">Experience the best trip ever
+
+
+
+
+
+                </h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="images/bg_3.jpg" alt="Second slide">
+            <div class="carousel-caption d-flex align-items-left">
+                <h5 class="x">Travel Operator Just For You</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="images/bg_4.jpg" alt="Third slide">
+            <div class="carousel-caption d-flex align-items-left">
+                <h5 class="x">Travel Operator Just For You</h5>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </header>
+</div>
+<br>
+<section>
+  <article>
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="h2">Our Tours <i class="fas fa-map-marked-alt d-none d-md-inline-block"></i></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card text-center noBorder">
+            <img class="card-img-top rounded-circle" src="images/promo-1.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Group Cruises</h4>
+              <p class="card-text">from $299</p>
+              <a href="#">READ MORE</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center noBorder">
+            <img class="card-img-top rounded-circle" src="images/promo-2.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Beach Tours</h4>
+              <p class="card-text">from $199</p>
+              <a href="#">READ MORE</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center noBorder">
+            <img class="card-img-top rounded-circle" src="images/promo-3.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Mountain Tours</h4>
+              <p class="card-text">from $179</p>
+              <a href="#">READ MORE</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center noBorder">
+            <img class="card-img-top rounded-circle" src="images/promo-4.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Family Tours</h4>
+              <p class="card-text">from $599</p>
+              <a href="#">READ MORE</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- on tour -->
+  <article>
+    <div class="container bg-light">
+      <div class="d-flex justify-content-center">
+        <div class="h2">Our Blog <i class="fas fa-map-marked-alt d-none d-md-inline-block"></i></div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="images/blog_1.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">July 7, 2018 Admin</h6>
+              <p class="card-text xxx">Even the all-powerful Pointing has no control about the blind texts</p>
+              <a href="#" class="link-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="images/blog_2.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">July 7, 2018 Admin</h6>
+              <p class="card-text xxx">Even the all-powerful Pointing has no control about the blind texts</p>
+              <a href="#" class="link-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <picture class="card-img-top"> <source media="(max-width: 768px)" srcset="images/blog_2.jpg"> <img class="card-img-top" src="images/blog_3.jpg" alt=""> </picture>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">July 7, 2018 Admin</h6>
+              <p class="card-text xxx">Even the all-powerful Pointing has no control about the blind texts</p>
+              <a href="#" class="link-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="images/blog_4.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">July 7, 2018 Admin</h6>
+              <p class="card-text xxx">Even the all-powerful Pointing has no control about the blind texts</p>
+              <a href="#" class="link-more">Read more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <div class="container-fluid footer">
+    <div class="d-flex justify-content-center">
+      <div class="footer-text">Copyright © 2018 All rights reserved </div>
+    </div>
+  </div>
+</footer>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
