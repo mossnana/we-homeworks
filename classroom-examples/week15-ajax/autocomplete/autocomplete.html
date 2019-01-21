@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+	.hint{
+		font-size: 10px;
+		font-family:Verdana, Geneva, sans-serif;
+		border: 1px solid blue;
+		margin-left:50px;
+	}
+	.hint tr td a{
+			text-decoration:none;
+	}
+	.hint tr td a:hover{
+		background-color:#CCC;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#word").keypress(function(){
+			$.post("autocomplete.php",
+	    {
+	      word: $("#word").val()
+	    },
+	    function(data, status){
+	      $("#hint").html(data);
+	    });
+	   });
+	});
+
+</script>
+</head>
+
+<body>
+	คำค้น : <input type="text" id="word" />
+  <span id="hint"></span>
+</body>
+</html>

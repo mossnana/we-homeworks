@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(function(){
+  $("#UserName").change(function(){
+    $.post("checkregister.php",
+    {
+      UserName: $("#UserName").val(),
+    },
+    function(data, status){
+      //alert(data);
+      if(data == "1"){
+        $("#msg").html("ชื่อผู้ใช้งานนี้ สามารถใช้งานได้");
+        $("#msg").css("color","green");
+      }
+      else{
+        $("#msg").html("มีข้อมูลชื่อผู้ใช้งานนี้แล้ว ไม่สามารถใช้ชื่อนี้ได้");
+        $("#msg").css("color","red");
+      }
+    });
+  });
+});
+</script>
+<body>
+<h4>เพิ่มข้อมูลผู้ใช้งาน</h4>
+ชื่อผู้ใช้ : <input type="text" id="UserName" /> <span id="msg"></span><br />
+รหัสผ่าน : <input type="password" id="UserPwd" /> <br />
+ระดับ :
+<select>
+  <option value="A">Admin</option>
+  <option value="U">User</option>
+</select><br />
+
+<input type="button" value="ตกลง" id="btn" />
+
+</body>
+</html>
