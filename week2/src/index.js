@@ -41,18 +41,24 @@ class App extends Component {
     }
     cipherResult = cipherResult.join("");
     this.result.current.value = cipherResult;
+    this.n.current.value = "";
   }
 
   render() {
     return (
       <div className="container">
-        <input type="text" ref={this.plainText} placeHolder="Plain text" />
-        <br />
-        <input type="text" ref={this.n} placeHolder="n" />
-        <br />
-        <button onClick={this.handleClick}>Cipher It</button>
-        <br />
-        <input type="text" ref={this.result} placeHolder="result" />
+        <form className="form-inline">
+          <div className="form-group mb-2">
+            <label forHTML="plaintext" className="sr-only">Plaintext</label>
+            <input type="text" className="form-control" name="plaintext" ref={this.plainText} placeholder="Plaintext" />
+          </div>
+          <div className="form-group mx-sm-3 mb-2">
+            <label forHTML="n-key" className="sr-only">n key</label>
+            <input type="text" className="form-control" name="n-key" ref={this.n} placeholder="n-key" />
+          </div>
+          <button type="submit" onClick={this.handleClick} className="btn btn-primary mb-2">Cipher It</button>
+        </form>
+        <input type="text" readonly className="form-control-plaintext" ref={this.result} placeHolder="Result" />
       </div>
     );
   }
