@@ -4,4 +4,8 @@ Week 1
   - Introduction
 
 Week 2
-  - Attack & Basic Cryptography : Caesar Cipher
+  - Attack & Introduction of Cryptography
+  - Caesar Cipher
+
+Week 3
+  - Symmetric Key Cryptography
