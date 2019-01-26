@@ -1,2 +1,2 @@
-# รวม Files ต่าง ๆ ในการเรียนการสอนและการบ้าน
-Web Engineering and Mobile Application Development @ DPU Lesson and Homework Files
+# Web Engineering and Mobile Applications Design
+วิศวกรรมเว็บกับการออกแบบแอปพลิเคชันบนอุปกรณ์พกพา
