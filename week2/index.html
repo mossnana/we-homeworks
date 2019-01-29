@@ -1,0 +1,23 @@
+// สร้าง ajax มารับค่า จาก rest-api.php
+<script>
+  var obj, dbParam, xmlhttp;
+  var resultArray;
+
+  obj = { "field":"*", "table":"static" };
+  dbParam = JSON.stringify(obj);
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      resultArray = JSON.parse(this.responseText);
+      console.table(resultArray);
+      document.getElementById("idName").innerText = resultArray[0].name;
+    }
+  };
+  // ส่งค่าไปรับ API
+  xmlhttp.open("GET", "api.php?request=" + dbParam, true);
+  xmlhttp.send();
+</script>
+
+<body>
+
+</body>
