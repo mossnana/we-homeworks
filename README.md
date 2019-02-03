@@ -6,3 +6,7 @@ Week 1
 Week 2
   - Tutorial 2 EditText และ Button Widget พร้อมกับส่งค่า Intent Parameter ไปยังอีกหน้านึง
   - Tutorial 3 นำสมาชิก Array ออกมาแสดงเป็น Lists ด้วย RecyclerView
+
+Week 3
+  - Tutorial 4 Recycler View with Grid View
+  - Tutorial 5 Introduction of Firebase Services
