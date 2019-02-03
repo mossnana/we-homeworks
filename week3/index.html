@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Product</title>
+  <!-- jquery plugin -->
+
+  <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+  <!-- bootstrap js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- datatables js -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+
+</head>
+
+<body>
+  <h3>Product</h3>
+
+  <button class="btn btn-default pull pull-right" data-toggle="modal" data-target="#addProduct" id="addProductModalBtn">
+
+    <span class="glyphicon glyphicon-plus-sign"></span> Add Product
+  </button>
+  <br /> <br /> <br />
+  <table id="table1" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category Id</th>
+        <th>Category Name</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+  </table>
+
+  <!-- add modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="addProduct">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria- hidden="true">&times;</span></button>
+
+          <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span> Add Product</h4>
+        </div>
+        <div class="modal-body">
+          <div class="messages"></div>
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+            </div>
+          </div>
+            <div class="form-group">
+              <label for="price" class="col-sm-2 control-label">Price</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Price">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="category" class="col-sm-2 control-label">Category</label>
+              <div class="col-sm-10" id="category">
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btnCreateProduct">Save</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- /add modal -->
+
+
+    <div id="msg" class="alert alert-success" role="alert" style="display: none">
+      <button type="button" class="close" data-dismiss="alert" aria- label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+
+    <script type="text/javascript">
+      $(function() {
+        var table1 = $('#table1').DataTable({
+          ajax: {
+            url: "../week3/product/readall",
+            dataSrc: 'items'
+          },
+          columns: [{
+              data: "id"
+            },
+            {
+              data: "name"
+            },
+            {
+              data: "description"
+            },
+            {
+              data: "price"
+            },
+            {
+              data: "category_id"
+            },
+            {
+              data: "category_name"
+            },
+            {
+              data: null,
+              className: "center",
+              defaultContent: '<a href="" class="editor_edit">Edit</a> / <a href = "" class ="editor_remove" > Delete </a>'
+            }
+          ]
+        });
+      });
+
+      $.get("../week3/product/readall",
+        function(data, status) {
+          var data = data["items"];
+          var select = $("<select></select>").attr("id", "category_id").attr("name", "category_id");
+
+          $.each(data, function(key, entry) {
+            select.append($('<option></option>').attr('value', entry.category_id).text(entry.category_name));
+          });
+          $('#category').html(select);
+        }
+      );
+
+      $("#btnCreateProduct").click(function() {
+        var myproduct = '{"name": "' + $("#name").val() + '", "description": "' +
+          $("#description").val() + '", "price": "' + $("#price").val() + '","category_id": "' + $("#category_id").val() + '" }';
+        $.post("../week3/product/create", myproduct,
+          function(data, status) {
+            $('#addProduct').modal('toggle');
+            $("#msg").text(data.message);
+            $('#msg').show();
+            table1.ajax.reload();
+            $("#msg").fadeTo(2000, 500).slideUp(500, function() {
+              $("#msg").slideUp(500);
+            });
+          });
+      });
+    </script>
+
+
+</body>
+
+</html>
