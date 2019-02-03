@@ -7,4 +7,4 @@ Week 2
   - Introduction of PHP Web Service
 
 Week 3
-  - Introduction of REST API Service
+  - Introduction of REST APIs Service
