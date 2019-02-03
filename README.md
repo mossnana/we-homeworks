@@ -1,2 +1,12 @@
-# รวม Files ต่าง ๆ ในการเรียนการสอนและการบ้าน
-Web Engineering and Mobile Application Development @ DPU Lesson and Homework Files
+# WE525 Mobile Application Development
+
+## iOS Develop with Swift
+
+- Week 1
+  - Introduction of Xcode
+  
+- Week 2
+  - การผูก Constrain ให้กับ UI
+  
+- Week 3
+  - Introduction of Target Action Pattern
