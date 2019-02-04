@@ -9,3 +9,9 @@ Week 2
 
 Week 3
   - Symmetric Key Cryptography
+
+Week 4
+ - Steam Cipher
+ - Asymmetric Key Cryptography
+ - Hash Function
+ - Combination of Symmetric Key, Asymmetric Key and Hash Function
