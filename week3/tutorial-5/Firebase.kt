@@ -12,10 +12,12 @@ class Firebase : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firebase)
-
+        
+        // Connect with firebase
         val database = FirebaseDatabase.getInstance()
+        // Get Database in Message Key
         val myRef = database.getReference("message")
-
+        // set Value of message
         myRef.setValue("Hello, World!")
     }
 }
