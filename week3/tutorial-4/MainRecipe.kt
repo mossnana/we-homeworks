@@ -7,9 +7,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
 class MainRecipe : AppCompatActivity() {
-
+    // Recycler View
     var menuView: RecyclerView? = null;
-
+    // Foods Array
     var foods = arrayOf(
         "ข้าวไข่เจียวหมูสับ",
         "กระเพราหมู/ไก่/กุ้ง",
@@ -26,7 +26,7 @@ class MainRecipe : AppCompatActivity() {
         "ใบเหลียงผัดไข่",
         "หมูหันครัวลุงรงค์"
     )
-
+    // Food Images Array
     var arrImg = arrayOf<Int>(
         R.drawable.image1,
         R.drawable.image2,
@@ -43,16 +43,16 @@ class MainRecipe : AppCompatActivity() {
         R.drawable.image13,
         R.drawable.image14
     )
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_recipe)
         this.setTitle("ครัวลุงรงค์")
-
+        
         menuView = findViewById(R.id.menuView) as RecyclerView
         menuView!!.layoutManager = LinearLayoutManager(this)
         menuView!!.setLayoutManager(GridLayoutManager(this, 2))
-
+        // Connect to myAdapter Kotlin Class
         val myAdapter = MyAdapter(foods,arrImg, this)
         menuView!!.setAdapter(myAdapter)
     }
