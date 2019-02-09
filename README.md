@@ -10,3 +10,7 @@ Week 2
 Week 3
   - Tutorial 4 Recycler View with Grid View
   - Tutorial 5 Introduction of Firebase Services
+  
+Week 4
+  - Tutorial 6 Recycler View with Firebase Database
+  - Tutorial 7 Simple Comic app from Firebase
