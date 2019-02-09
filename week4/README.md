@@ -1,1 +1,12 @@
 # Simple Comic App from Firebase Database
+- แบ่งออกเป็น 2 หน้าหลักๆ คือ
+  - activity_main.xml
+    - M คือ DataModel.kt
+    - V คือ MainActivity.kt
+    - C คิอ DataAdapter.kt
+  - activity_information.xml
+    - M คือ DataModel.kt
+    - V คือ InformationActivity.kt
+    - C คือ ComicDataAdapter.kt
+- model.xml คือ หน้าที่แสดงใน Recycler View ของ Main Activity
+- pages.xml คือ หน้าที่แสดงใน Recycler View ของ Information Activity
