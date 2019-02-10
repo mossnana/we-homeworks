@@ -10,3 +10,6 @@
   
 - Week 3
   - Introduction of Target Action Pattern
+
+- Week 4
+  - Stepper and Slider UI
