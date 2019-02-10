@@ -14,15 +14,140 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
+  <script type="text/javascript">
+    $(function() {
+      $("#btnCreateProduct").click(function() {
+        var myproduct = '{"name": "' + $("#name").val() + '", "description": "' +
+          $("#description").val() + '", "price": "' + $("#price").val() + '","category_id": "' + $("#category_id").val() + '" }';
+        $.post("../week3/product/create", myproduct,
+          function(data, status) {
+            $('#addProduct').modal('toggle');
+            $("#msg").text(data.message);
+            $('#msg').show();
+            table1.ajax.reload();
+            $("#msg").fadeTo(2000, 500).slideUp(500, function() {
+              $("#msg").slideUp(500);
+            });
+          });
+      });
 
+      $.get("../week3/category/readall",
+        function(data, status) {
+          var data = data["items"];
+          var select = $("<select></select>").attr("id", "category_id").attr("name", "category_name");
+          $.each(data, function(key, entry) {
+            select.append($('<option></option>').attr('value', entry.category_id).text(entry.category_name));
+          });
+          $('#category').html(select);
+        }
+      );
 
+      var table1 = $('#table1').DataTable({
+        ajax: {
+          url: "../week3/product/readall",
+          dataSrc: 'items'
+        },
+        columns: [{
+            data: "id"
+          },
+          {
+            data: "name"
+          },
+          {
+            data: "description"
+          },
+          {
+            data: "price"
+          },
+          {
+            data: "category_id"
+          },
+          {
+            data: "category_name"
+          },
+          {
+            data: null,
+            className: "center",
+            defaultContent: '<a href="" class="edit">Edit</a> / <a href = "" class ="remove" > Delete </a>'
+          }
+        ],
+        rowId: 'id'
+      });
+
+      // Edit Data
+      $('#table1').on('click', 'a.edit', function(e) {
+        e.preventDefault();
+        var id = table1.row($(this).parents("tr")).id();
+        // Get API Read One Product
+        $.get(`../week3/product/readone?id=${id}`,
+          function(data, status) {
+            console.log(status)
+            $('#idEdit').val(data.id);
+            $('#nameEdit').val(data.name);
+            $('#descriptionEdit').val(data.description);
+            $('#priceEdit').val(data.price);
+            var categoryThisProduct = data.category_id
+            // Get Category
+            $.get("../week3/category/readall",
+              function(data, status) {
+                var data = data["items"];
+                var selectEdit = $("<select></select>").attr("id", "category_id").attr("name", "category_name");
+                $.each(data, function(key, entry) {
+                  if (categoryThisProduct === entry.category_id) {
+                    selectEdit.append($('<option></option>').attr('value', entry.category_id).attr('selected', 'selected').text(entry.category_name));
+                  } else {
+                    selectEdit.append($('<option></option>').attr('value', entry.category_id).text(entry.category_name));
+                  }
+                });
+                $('#categoryEdit').html(selectEdit);
+              });
+            $('#editProduct').modal('toggle');
+          });
+      });
+
+      $("#btnEditProduct").click(function() {
+        var myproduct = '{"id": "' + $("#idEdit").val() + '", "name": "' + $("#nameEdit").val() + '", "description": "' +
+          $("#descriptionEdit").val() + '", "price": "' + $("#priceEdit").val() + '","category_id": "' + $("#category_id").val() + '" }';
+        console.log(myproduct)
+        $.post("../week3/product/update", myproduct,
+          function(data, status) {
+            $('#editProduct').modal('toggle');
+            $('#msgEdit').show();
+            table1.ajax.reload();
+            $("#msgEdit").fadeTo(2000, 500).slideUp(500, function() {
+              $("#msgEdit").slideUp(500);
+            });
+          });
+      });
+
+      // Delete Data
+      $('#table1').on('click', 'a.remove', function(e) {
+        e.preventDefault();
+        $('#deleteProduct').modal('toggle');
+        var id = table1.row($(this).parents("tr")).id();
+        $("#btnDeleteProduct").click(function() {
+          $.get(`../week3/product/delete?id=${id}`, function(data, status) {
+            console.log(status)
+            if (status === "success") {
+              $('#msgDelete').show();
+              table1.ajax.reload();
+              $("#msgDelete").fadeTo(1000, 500).slideUp(500, function() {
+                $("#msgDelete").slideUp(500);
+              });
+              $('#deleteProduct').modal('toggle');
+            } else {
+              console.log(status);
+            }
+          });
+        });
+      });
+    });
+  </script>
 </head>
 
 <body>
   <h3>Product</h3>
-
   <button class="btn btn-default pull pull-right" data-toggle="modal" data-target="#addProduct" id="addProductModalBtn">
-
     <span class="glyphicon glyphicon-plus-sign"></span> Add Product
   </button>
   <br /> <br /> <br />
@@ -84,76 +209,83 @@
   </div><!-- /.modal -->
   <!-- /add modal -->
 
+  <!-- edit modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="editProduct">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria- hidden="true">&times;</span></button>
+          <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>Edit Product</h4>
+        </div>
+        <div class="modal-body">
+          <div class="messages"></div>
+          <div class="form-group">
+            <label for="nameEdit" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+              <input type="hidden" class="form-control" name="idEdit" id="idEdit">
+              <input type="text" class="form-control" id="nameEdit" name="nameEdit" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="descriptionEdit" name="descriptionEdit" placeholder="Description">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">Price</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="priceEdit" name="priceEdit" placeholder="Price">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="categoryEdit" class="col-sm-2 control-label">Category</label>
+            <div class="col-sm-10" id="categoryEdit">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="btnEditProduct">Save</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- /edit modal -->
 
-    <div id="msg" class="alert alert-success" role="alert" style="display: none">
-      <button type="button" class="close" data-dismiss="alert" aria- label="Close"><span aria-hidden="true">&times;</span></button>
-    </div>
+  <!-- delete modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="deleteProduct">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria- hidden="true">&times;</span></button>
+          <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span> Delete Product</h4>
+        </div>
+        <div class="modal-body">
+          <div class="messages text-center">Do you want to delete Product?</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger" id="btnDeleteProduct">Delete !</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- /edit modal -->
 
-    <script type="text/javascript">
-      $(function() {
-        var table1 = $('#table1').DataTable({
-          ajax: {
-            url: "../week3/product/readall",
-            dataSrc: 'items'
-          },
-          columns: [{
-              data: "id"
-            },
-            {
-              data: "name"
-            },
-            {
-              data: "description"
-            },
-            {
-              data: "price"
-            },
-            {
-              data: "category_id"
-            },
-            {
-              data: "category_name"
-            },
-            {
-              data: null,
-              className: "center",
-              defaultContent: '<a href="" class="edit">Edit</a> / <a href = "" class ="remove" > Delete </a>'
-            }
-          ]
-        });
-      });
+  <!-- alert create  -->
+  <div id="msg" class="alert alert-success" role="alert" style="display: none">
+    <button type="button" class="close" data-dismiss="alert" aria- label="Close"><span aria-hidden="true">&times;</span></button>
+  </div>
 
-      $.get("../week3/category/readall",
-        function(data, status) {
-          var data = data["items"];
-          var select = $("<select></select>").attr("id", "category_id").attr("name", "category_name");
+  <!-- alert Edit  -->
+  <div id="msgEdit" class="alert alert-warning" role="alert" style="display: none">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">Edit Successful<span aria-hidden="true"></span></button>
+  </div>
 
-          $.each(data, function(key, entry) {
-            select.append($('<option></option>').attr('value', entry.category_id).text(entry.category_name));
-          });
-          $('#category').html(select);
-        }
-      );
-
-      $("#btnCreateProduct").click(function() {
-        var myproduct = '{"name": "' + $("#name").val() + '", "description": "' +
-          $("#description").val() + '", "price": "' + $("#price").val() + '","category_id": "' + $("#category_id").val() + '" }';
-        $.post("../week3/product/create", myproduct,
-          function(data, status) {
-            $('#addProduct').modal('toggle');
-            $("#msg").text(data.message);
-            $('#msg').show();
-            table1.ajax.reload();
-            $("#msg").fadeTo(2000, 500).slideUp(500, function() {
-              $("#msg").slideUp(500);
-            });
-          });
-
-      });
-
-    </script>
-
-
+  <!-- alert Delete  -->
+  <div id="msgDelete" class="alert alert-danger" role="alert" style="display: none">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">Delete Successful</span></button>
+  </div>
 </body>
-
 </html>
