@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to Firebase Hosting</title>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.yellow-light_green.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+</head>
+
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--scroll">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">ระบบสมาชิก</span>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">เมนู</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="add.html">เพิ่ม</a>
+      </nav>
+    </div>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:40%;" id="ex-table">
+      <thead>
+        <tr>
+          <th>Cover</th>
+          <th>Title</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script type="text/javascript">
+    var config = {
+      apiKey: "AIzaSyDa8VH-8SZEDQtFssbuawhjjEYKWDGNMaU",
+      authDomain: "testmyapp-xxxxx.firebaseapp.com",
+      databaseURL: "https://testmyapp-xxxxx.firebaseio.com",
+      projectId: "testmyapp-xxxxx",
+      storageBucket: "testmyapp-xxxxx.appspot.com",
+      messagingSenderId: "900345852931"
+    };
+    firebase.initializeApp(config);
+
+    var database = firebase.database();
+    var low_database = firebase.database();
+
+    var ref = firebase.database().ref("bookshelf/data/");
+    console.log(ref.key);
+    ref.orderByChild("title").limitToFirst(20).on("child_added", function (snapshot) {
+      //console.log("Key: "+snapshot.key, "snapshot",snapshot.val());
+      var content = '';
+      console.log(snapshot.val().photos);
+      console.log("username: ", snapshot.val().username);
+      content += '<tr >';
+      content += '<td align="left"> <img src="' + snapshot.val().photos + '" style="width:100px; height:auto;"/></td>';
+      content += '<td align="left">' + snapshot.val().title + '</td>';
+      content += '<td><a href="edit.html?id=' + snapshot.key + '" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Edit</a></td>';
+      content += '<td><a href="delete.html?id=' + snapshot.key + '" class="mdl-button mdl-js-button mdl-button--raised">Delete</a></td>';
+      content += '</tr>';
+      var theDiv = document.getElementById("ex-table");
+      theDiv.innerHTML += content;
+
+    });
+
+  </script>
+</body>
+
+</html>

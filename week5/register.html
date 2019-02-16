@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to Firebase Hosting</title>
+
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.yellow-light_green.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+</head>
+
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--scroll">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">ระบบสมาชิก</span>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">เมนู</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="register.html">สมัครสมาชิกใหม่</a>
+      </nav>
+    </div>
+    <div style="margin:0 auto;" align="center">
+      <h1>Register</h1>
+      <form>
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <tbody>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Email</td>
+              <td>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="email" id="email">
+                  <label class="mdl-textfield__label" for="email">Email...</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Password</td>
+              <td>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="password" id="password">
+                  <label class="mdl-textfield__label" for="password">...</label>
+                  <span class="mdl-textfield__error"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">
+                <button id="sign-up" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                  Register
+                </button>
+              </td>
+
+              <td class="mdl-data-table__cell--non-numeric">
+                <a href="index.html">Already have account</a>
+
+              </td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">
+                Console:
+              </td>
+              <td>
+                <div class="panel panel-danger" id="errors" style='display: none;'>
+                </div>
+                <div class="panel panel-primary" id="success" style='display: none;'>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="row"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDa8VH-8SZEDQtFssbuawhjjEYKWDGNMaU",
+      authDomain: "testmyapp-xxxxx.firebaseapp.com",
+      databaseURL: "https://testmyapp-xxxxx.firebaseio.com",
+      projectId: "testmyapp-xxxxx",
+      storageBucket: "testmyapp-xxxxx.appspot.com",
+      messagingSenderId: "900345852931"
+    };
+    firebase.initializeApp(config);
+
+    document.getElementById("sign-up").onclick = function (e) {
+      e.preventDefault();
+      handleSignUp();
+    }
+
+    async function handleSignUp() {
+      var errors = document.getElementById('errors');
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var warnings = "";
+
+      if (email.length < 4) {
+        warnings += 'You need a valid email chief <br/>';
+      }
+      if (password.length < 4) {
+        warnings += 'You need a valid password boss <br/>';
+      }
+
+      if (warnings != "") {
+        console.log(warnings);
+        errors.style.display = 'block';
+        errors.innerHTML = warnings;
+      } else {
+        errors.style.display = "none";
+        // firebase auth function
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+          errors.style.display = (errors.style.display === "none" || errors.style.display === "") ? "block" : "none";
+          console.log(error);
+          errors.innerHTML = error + "<br/>";
+        });
+      }
+
+      await firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+
+          var fireBase_name = user.displayName;
+          var fireBase_email = user.email;
+
+          var fireBase_emailVerified = user.emailVerified;
+          var fireBase_uid = user.uid;
+          var success = document.getElementById('success');
+          success.style.display = (success.style.display === "none" || success.style.display === "") ? "block" : "none";
+          success.innerHTML = "User Logged in with Credentials: <br />" +
+            "<b>Name:</b> " + fireBase_name + "<br />" +
+            "<b>Email: </b>" + fireBase_email + "<br />" +
+            "<b>emailVerified: </b>" + fireBase_emailVerified + "<br />" +
+            "<b>uid: </b>" + fireBase_uid + "<br />";
+          window.location.href = "main.html";
+        }
+      });
+
+
+      firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+      }, function (error) {
+        // An error happened.
+      });
+
+
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
