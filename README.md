@@ -16,6 +16,6 @@ Week 4
   - Tutorial 7 Simple Comic app from Firebase
   
 Week 5
-  - Firebase CRUD with File Upload
+  - Tutorial 8 Firebase CRUD with File Upload
 
 Credit : <a href="http://www.daydev.com/">Daydev : Aj.Banyapon Poolsawas</a>
