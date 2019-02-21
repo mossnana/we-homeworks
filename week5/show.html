@@ -28,12 +28,27 @@
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:40%;" id="ex-table">
         <thead>
         <tr>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Operation</th>
+            <th><a class="mdl-navigation__link" href="main.html"><i class="material-icons">keyboard_arrow_left</i>ย้อนกลับ</a></th>
+            <th>Movie Detail</th>
         </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>Photo</td>
+                <td align="center"><img src="" alt="Photo" style="width:300px; height:auto;" id="photos"></td>
+            </tr>
+            <tr>
+                <td>ID</td>
+                <td align="center"><div id="showID"></div></td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td align="center"><div id="title"></div></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td align="center"><div id="desc"></div></td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -48,22 +63,18 @@
     };
     firebase.initializeApp(config);
     var database = firebase.database();
-    var low_database = firebase.database();
     var ref = firebase.database().ref("bookshelf/data/");
     console.log(ref.key);
-    ref.orderByChild("title").limitToFirst(20).on("child_added", function (snapshot) {
-        var content = '';
-        console.log(snapshot.val().photos);
-        console.log("username: ", snapshot.val().username);
-        console.log(snapshot.key);
-        content += '<tr >';
-        content += '<td align="left"> <img src="' + snapshot.val().photos + '" style="width:100px; height:auto;"/></td>';
-        content += '<td align="left"><a href="show.html?id='+ snapshot.key +'">' + snapshot.val().title + '</a></td>';
-        content += '<td><a href="edit.html?id=' +snapshot.key + '" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Edit</a>';
-        content += '<span><a href="delete.html?id=' + snapshot.key + '" class="mdl-button mdl-js-button mdl-button--raised">Delete</a></span></td>';
-        content += '</tr>';
-        var theDiv = document.getElementById("ex-table");
-        theDiv.innerHTML += content;
+    var searchParams = new URLSearchParams(window.location.search);
+    var ref = firebase.database().ref("bookshelf/data/" + searchParams.get("id"));
+    ref.on("child_added", function (snapshot) {
+        document.getElementById("showID").innerHTML = searchParams.get("id");
+        if (snapshot.key === "photos") {
+            console.log(snapshot.val());
+            document.getElementById(snapshot.key).src = snapshot.val();
+        } else {
+            document.getElementById(snapshot.key).innerHTML = snapshot.val();
+        }
     });
 </script>
 </body>

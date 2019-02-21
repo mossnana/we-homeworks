@@ -2,138 +2,139 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to Firebase Hosting</title>
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.yellow-light_green.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.yellow-light_green.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
 </head>
 
 <body>
-  <div class="mdl-layout mdl-js-layout">
+<div class="mdl-layout mdl-js-layout">
     <header class="mdl-layout__header mdl-layout__header--scroll">
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">Add new data</span>
-      </div>
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Add new data</span>
+        </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Menu</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="main.html">Report</a>
-        <a class="mdl-navigation__link" href="logout.html" id="sign-out">Logout</a>
-      </nav>
+        <span class="mdl-layout-title">Menu</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="main.html">Report</a>
+            <a class="mdl-navigation__link" href="logout.html" id="sign-out">Logout</a>
+        </nav>
     </div>
     <main class="mdl-layout__content">
-      <div class="page-content" style="padding-top: 60px;" align="center">
-        <!-- Your content goes here -->
-        <h4>Add Data</h4>
-        <form>
-          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-              <tr>
-                <th class="mdl-data-table__cell--non-numeric">Segments</th>
-                <th>
-                  <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="♥">account_box</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Title</td>
-                <td>
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="title" id="title">
-                    <label class="mdl-textfield__label" for="title">Title...</label>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Content</td>
-                <td>
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows="5" id="content"></textarea>
-                    <label class="mdl-textfield__label" for="content">Content...</label>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Image</td>
-                <td>
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="file" id="fileButton" />
-                  </div>
-                </td>
-                <td>
-                  <div id="tt3" class="icon material-icons">cloud_upload</div>
-                  <div class="mdl-tooltip" data-mdl-for="tt3">
-                    Upload <strong>file.zip</strong>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">
-                  <button id="add-data" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-                    Submit
-                  </button>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Console:</td>
-                <td>
-                  <div class="panel panel-danger" id="errors" style='display: none;'> </div>
-                  <div class="panel panel-primary" id="success" style='display: none;'></div>
-                  <div class="col-xs-2"></div>
-                  <div class="row"></div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
-      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-      <!--Configure firebase-->
-      <script>
-        var config = {
-          apiKey: "AIzaSyDa8VH-8SZEDQtFssbuawhjjEYKWDGNMaU",
-          authDomain: "testmyapp-xxxxx.firebaseapp.com",
-          databaseURL: "https://testmyapp-xxxxx.firebaseio.com",
-          projectId: "testmyapp-xxxxx",
-          storageBucket: "testmyapp-xxxxx.appspot.com",
-          messagingSenderId: "900345852931"
-        };
-
-
-        var thumbnail;
-
-        firebase.initializeApp(config);
-        var database = firebase.database();
-
-        var fileButton = document.getElementById("fileButton");
-        fileButton.addEventListener('change', function (e) {
-          var file = e.target.files[0];
-          var storageRef = firebase.storage().ref(file.name);
-          storageRef.put(file);
-          thumbnail = "https://firebasestorage.googleapis.com/v0/b/" + config["storageBucket"] + "/o/" + file.name + "?alt=media";
-        });
-        document.getElementById("add-data").onclick = function (e) {
-
-          var title = document.getElementById('title').value;
-          var content = document.getElementById('content').value;
-          var rootRef = firebase.database().ref();
-          var storesRef = rootRef.child('bookshelf/data/');
-          var newStoreRef = storesRef.push();
-          newStoreRef.set({
-            title: title,
-            content: content,
-            photos: thumbnail
-          });
-          alert("Success");
-        }
-      </script>
+        <div class="page-content" style="padding-top: 60px;" align="center">
+            <!-- Your content goes here -->
+            <h4>Add Data</h4>
+            <form>
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Segments</th>
+                        <th>
+                            <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="♥">account_box</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Title</td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="title" id="title">
+                                <label class="mdl-textfield__label" for="title">Title...</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Content</td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" type="text" rows="5" id="content"></textarea>
+                                <label class="mdl-textfield__label" for="content">Content...</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Image</td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input type="file" id="fileButton" />
+                            </div>
+                        </td>
+                        <td>
+                            <div id="tt3" class="icon material-icons">cloud_upload</div>
+                            <div class="mdl-tooltip" data-mdl-for="tt3">
+                                Upload <strong>Picture</strong>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="" alt="" id="photoss">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button id="add-data" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                Submit
+                            </button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Console:</td>
+                        <td>
+                            <div class="panel panel-danger" id="errors" style='display: none;'> </div>
+                            <div class="panel panel-primary" id="success" style='display: none;'></div>
+                            <div class="col-xs-2"></div>
+                            <div class="row"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <!--Configure firebase-->
+        <script>
+            var config = {
+                apiKey: "AIzaSyDa8VH-8SZEDQtFssbuawhjjEYKWDGNMaU",
+                authDomain: "testmyapp-xxxxx.firebaseapp.com",
+                databaseURL: "https://testmyapp-xxxxx.firebaseio.com",
+                projectId: "testmyapp-xxxxx",
+                storageBucket: "testmyapp-xxxxx.appspot.com",
+                messagingSenderId: "900345852931"
+            };
+            var thumbnail;
+            firebase.initializeApp(config);
+            var database = firebase.database();
+            var fileButton = document.getElementById("fileButton");
+            fileButton.addEventListener('change', function (e) {
+                var file = e.target.files[0];
+                var storageRef = firebase.storage().ref(file.name);
+                storageRef.put(file);
+                thumbnail = "https://firebasestorage.googleapis.com/v0/b/" + config["storageBucket"] + "/o/" + file.name + "?alt=media";
+                document.getElementById("photoss").src = thumbnail;
+            });
+            document.getElementById("add-data").onclick = function (e) {
+                var title = document.getElementById('title').value;
+                var content = document.getElementById('content').value;
+                var rootRef = firebase.database().ref();
+                var storesRef = rootRef.child('bookshelf/data/');
+                var newStoreRef = storesRef.push();
+                newStoreRef.set({
+                    title: title,
+                    content: content,
+                    photos: thumbnail
+                });
+                alert("Success");
+            }
+        </script>
 
 
 </body>
