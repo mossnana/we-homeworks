@@ -1,0 +1,108 @@
+<html>
+
+<head>
+  <title>Firebase Cloud Message</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">FCM (Firebase Cloud Messaging</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="http://www.facebook.com/ANTDPU">
+         ANT DPU on Facebook
+        </a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="http://www.facebook.com/ANTDPU">
+        ANT DPU on Facebook
+      </a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+    <!-- Your content goes here -->
+    <p id="contact-success" class="text-success lead"></p>
+    <p id="contact-error" class="text-danger lead"></p>
+    <div align="center" style="padding-top: 20px;">
+    <form id="contact-form" role="form">
+      <table class="mdl-data-table mdl-js-data-table">
+      <thead>
+        <tr><td>Device Token:</td>
+          <td><div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="txt_token" name="txt_token">
+              <label class="mdl-textfield__label" for="txt_token">Device Token...</label>
+            </div></td></tr>
+        <tr><td>Title:</td>
+          <td><div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="txt_title" name="txt_title">
+              <label class="mdl-textfield__label" for="txt_title">Title...</label>
+            </div></td></tr>
+        <tr><td>Body:</td>
+          <td><div class="mdl-textfield mdl-js-textfield">
+              <textarea class="mdl-textfield__input" type="text" rows="4" id="txt_body"  name="txt_body"></textarea>
+              <label class="mdl-textfield__label" for="txt_body">Body...</label>
+            </div>
+            <br/>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="btn_send">Submit Data</button>
+          </td></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    </form>
+    </div>
+
+       <p id="contact-success" class="text-success lead"></p>
+       <p id="contact-error" class="text-danger lead"></p>
+    </div>
+  </main>
+  <script type="text/javascript">
+  $("#btn_send").click(function(){
+    sendNotification();
+  });
+ 
+  function sendNotification(){
+    var token = $("#txt_token").val();
+  var title = $("#txt_title").val();
+  var body = $("#txt_body").val();
+  var obj = {
+              "to": token,
+              "priority": "high",
+              "notification" : 
+                {"body":body, "title":title, "icon":"ic_launcher" ,"color" :"#f1c40f"}
+      }
+  $.ajax({
+    type: "post",
+    url: "https://fcm.googleapis.com/fcm/send",
+    contentType: "application/json;",
+    headers: {
+      "Authorization": "key=AAAAMhYnj74:APA91bE5fEEbiutC8nKS-4L8J8QzFmNium4aX7R6KJy-CVIfeBY3MH-2BI-jC8FrwfDuykovqvy5BapxxQsO8ZT3r8Xw2PhDYJDbUV1YNsncScSrkM8U2ghHx0As2v1nSlth1Macf6Ai"
+    },
+    data: JSON.stringify(obj),
+    success: function(data) {
+      console.log("Success");
+      alert("success");
+    },
+    error: function(data){
+      console.log("error ");
+      alert("error");
+    }
+  });
+}
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.yellow-light_green.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">แก้ไขข้อมูล</span>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">เมนู</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="add.html">เพิ่มข้อมูล</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content" style="padding-top: 60px; margin:0 auto" align=center>
+            <!-- Your content goes here -->
+            <h4>Edit Data</h4>
+            <form>
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Segments</th>
+                        <th>
+                            <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="♥">account_box</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Title</td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" id="title" placeholder="Title">
+                                <label class="mdl-textfield__label" for="title">Title...</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Content</td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" placeholder="Content" rows="5" id="desc"></textarea>
+                                <label class="mdl-textfield__label" for="desc">Content...</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Image</td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input type="file" id="fileButton" />
+                            </div>
+                        </td>
+                        <td>
+
+                            <textarea class="mdl-textfield__input" type="text" rows="5" id="photos"></textarea>
+                            <div id="tt3" class="icon material-icons">cloud_upload</div>
+                            <div class="mdl-tooltip" data-mdl-for="tt3">
+                                Upload <strong>file.zip</strong>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button id="add-data" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                Submit
+                            </button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Console:</td>
+                        <td>
+                            <div class="panel panel-danger" id="errors" style='display: none;'> </div>
+                            <div class="panel panel-primary" id="success" style='display: none;'></div>
+                            <div class="col-xs-2"></div>
+                            <div class="row"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+
+
+            <!-- Your content goes here -->
+        </div>
+    </main>
+</div>
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAp_BnfdAjiIi2RcTJuEf-0904Nsi8_eMs",
+      authDomain: "android-tv-week6.firebaseapp.com",
+      databaseURL: "https://android-tv-week6.firebaseio.com",
+      projectId: "android-tv-week6",
+      storageBucket: "android-tv-week6.appspot.com",
+      messagingSenderId: "519077683796"
+    };
+    firebase.initializeApp(config);
+    var photos;
+    var searchParams = new URLSearchParams(window.location.search);
+    var ref = firebase.database().ref("stream/channel" + searchParams.get("id"));
+    ref.on("child_added", function (snapshot) {
+        document.getElementById(snapshot.key).value = snapshot.val();
+    });
+    var fileButton = document.getElementById("fileButton");
+    fileButton.addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        var storageRef = firebase.storage().ref(file.name);
+        storageRef.put(file);
+        photos = "https://firebasestorage.googleapis.com/v0/b/" + config["storageBucket"] + "/o/" + file.name + "?alt=media";
+        console.log(photos)
+        document.getElementById('photos').value = photos;
+    });
+    document.getElementById("add-data").onclick = function (e) {
+        e.preventDefault();
+        var title = document.getElementById('title').value;
+        var desc = document.getElementById('desc').value;
+        if (photos == "" || photos == null) {
+            photos = document.getElementById('photos').value;
+        }
+        var rootRef = firebase.database().ref();
+        var storesRef = rootRef.child('stream/channel' + searchParams.get("id"));
+        storesRef.set({
+            title: title,
+            desc: desc,
+            photos: photos
+        });
+        window.location.href = "main.html";
+    }
+</script>
+</body>
+
+</html>
