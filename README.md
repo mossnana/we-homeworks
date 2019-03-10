@@ -13,3 +13,11 @@
 
 - Week 4
   - Stepper and Slider UI
+
+- Week 5
+  - BMI Calculator App
+  
+- Week 6
+  - BMI Calculator App with ...
+    - Closure Expension
+    - Alert Box ในแบบต่างๆ
