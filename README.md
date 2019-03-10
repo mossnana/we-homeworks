@@ -18,4 +18,7 @@ Week 4
 Week 5
   - Tutorial 8 Firebase CRUD with File Upload
 
+Week 6
+  - Tutorial 9 Steaming Application with Video Viewer
+
 Credit : <a href="http://www.daydev.com/">Daydev : Aj.Banyapon Poolsawas</a>
