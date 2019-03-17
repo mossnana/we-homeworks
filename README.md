@@ -13,3 +13,9 @@ Week 3
 Week 4 & 5
   - Example 1: Props and State
   - Example 2: Component Life Cycle
+
+Week 6 & 7
+  - งดไป
+
+Week 8
+  - APIs and Redux
