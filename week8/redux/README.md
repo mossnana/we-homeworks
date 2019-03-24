@@ -15,12 +15,13 @@ var initialState = {
   couter: 0,
   text: ""
 }
+
 function counterReducer(state = initialState, action) {
   switch (action.type) {
     case Action.INCREMENT:
       return {
-      couter: state.couter + 1,
-      text: action.text
+        couter: state.couter + 1,
+        text: action.text
       }
     case Action.DECREMENT:
       return {
@@ -29,8 +30,9 @@ function counterReducer(state = initialState, action) {
       }
     default:
       return state
-    }
+  }
 }
+
 export default counterReducer;
 ```
 
