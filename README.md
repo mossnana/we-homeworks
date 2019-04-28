@@ -15,3 +15,6 @@ Week 4
  - Asymmetric Key Cryptography
  - Hash Function
  - Combination of Symmetric Key, Asymmetric Key and Hash Function
+
+Facebook OAuth Homework
+- การบ้านส่งอาจารย์ ทดลองทำ OAuth
