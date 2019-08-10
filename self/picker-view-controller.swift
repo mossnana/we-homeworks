@@ -26,6 +26,7 @@ class ContactViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // ทำให้ ViewController รู้จักกับวงล้อ contactType และ publicType
         pickerViewContactType.selectRow(2, inComponent: 0, animated: true)
         pickerViewContactType.selectRow(1, inComponent: 1, animated: true)
+        // หลังจากนั้นต้องทำการลาก Picker View ไปเชื่อมกับ Contact View Controller ด้วยในหน้าออกแบบด้วยการ Ctrl + Drag
     }
     
     /* =================== Functions ที่ถูก inherit มาจาก PickerViewDataSource =================== */
