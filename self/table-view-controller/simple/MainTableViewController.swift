@@ -33,6 +33,7 @@ class MainTableViewController: UITableViewController {
      1. numberOfSections: ใส่จำนวนตาราง
      2. tableView(... numberOfRowsInSection section: Int) : ใส่จำนวนแถวในแต่ละตาราง
      3. tableView(... cellForRowAt indexPath: IndexPath) : ใส่ข้อมูลในแต่ละแถว
+     4. tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) : Action ต่างๆ ในแถว
      */
     // จำนวน Table View  ใน View Controller นี้
     // ถ้าใช้เป็นตัว Table View Controller เลยแล้วใส่ numberOfSections เป็น 2 จะวนข้อมูลแถว 2 ครั้งใน ตารางเดียว ซึ่งไม่ดีแน่ !!!
@@ -52,5 +53,12 @@ class MainTableViewController: UITableViewController {
         cell.textLabel?.text = "\(myContactInfoList[indexPath.row].contactName) [\(myContactInfoList[indexPath.row].contactNickname)]"
         cell.detailTextLabel?.text = "\(myContactInfoList[indexPath.row].contactPhoneNumber)"
         return cell
+    }
+    // การลบข้อมูล
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            myContactInfoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
     }
 }
