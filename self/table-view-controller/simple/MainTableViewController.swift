@@ -20,7 +20,7 @@ class MainTableViewController: UITableViewController {
         self.title = "Main List"
         // สร้างข้อมูลปลอมๆ ขึ้นมาทดสอบ
         let myFriend_1: ContactInformation = ContactInformation(contactName: "Permpoon Chaowanaphunphon", contactNickname: "Perm", contactPhoneNumber: "080-677-5134", contactType: 0, contactPublicType: 0, contactImage: UIImage(named: "b1.jpg")!)
-        let myFriend_2: ContactInformation = ContactInformation(contactName: "Wirawhorn Wannasorn", contactNickname: "Kloy", contactPhoneNumber: "088-262-0205", contactType: 0, contactPublicType: 0, contactImage: UIImage(named: "b2.jpg")!)
+        let myFriend_2: ContactInformation = ContactInformation(contactName: "Wirawhorn Wannasorn", contactNickname: "Kloy", contactPhoneNumber: "08X-XXX-XXXX", contactType: 0, contactPublicType: 0, contactImage: UIImage(named: "b2.jpg")!)
         // เอาข้อมูลเก็บไว้ใน Array -> ContactInformation
         myContactInfoList.append(myFriend_1)
         myContactInfoList.append(myFriend_2)
