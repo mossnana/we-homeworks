@@ -4,15 +4,20 @@
 
 ### อธิบาย
 
-- มักใช้กับ Software Model แบบ **Waterfall** 
-- ปกติ Testing เป็นขั้นตอนหนึ่งใน Waterfall model แต่ในขั้นตอนของการ Testing แบบ V-model จะ แบ่งขั้นตอนการ Test ควบคู่กับ Waterfall model คือ
+- มักใช้กับ Software Model แบบ **Waterfall**
+- ลักษณะการไล่ขั้นตอนของการทดสอบแบบ V Model จะเป็น ล่าง ขึ้น บน คือ เริ่มจาก unit test ก่อนแล้วค่อยไล่ขึ้นไป Integration test ไป System test และ Acceptance test
+
+### Validation & Verification
+
+- **Validation** : ตรวจสอบให้ได้ผลลัพท์ตามเป้าหมาย
+- **Verification** : ตรวจสอบให้ได้ตาม**ผลลัพท์**เป้าหมาย และ**กระบวนการทำงาน**ถูกต้องตามเป้าหมาย
 
 ```mermaid
 sequenceDiagram
-	Waterfall->V Model: Requirements : Acceptance
-	Waterfall->V Model: High-Lavel Design : System
-	Waterfall->V Model: Detailed Design : Integration
-	Waterfall->V Model: Coding : Unit
+	Waterfall->V Model: Requirements : 4. Acceptance
+	Waterfall->V Model: High-Lavel Design : 3. System
+	Waterfall->V Model: Detailed Design : 2. Integration
+	Waterfall->V Model: Coding : 1. Unit
 ```
 
 
@@ -21,7 +26,21 @@ sequenceDiagram
 
 ## อธิบาย
 
+- เน้นการทดสอบมากขึ้น โดยที่ในขั้นตอนในการผลิตซอฟแวร์ จะมี **เอกสารการทดสอบ** กำกับ
 
+```mermaid
+sequenceDiagram
+	alt w-model
+	Waterfall->Testing Document: Test the Requirement
+	Waterfall->Testing Document: Test the Specification
+	Waterfall->Testing Document: Test the Design
+	Waterfall->Testing Document: Testing
+	end
+	Testing->Waterfall: Unit Test
+	Testing->Waterfall: Intregation Test
+	Testing->Waterfall: System Test
+	Testing->Waterfall: Acceptance Test
+```
 
 
 
@@ -33,9 +52,13 @@ sequenceDiagram
 
 ### อธิบาย
 
+- ดูกรอบของการทดสอบว่า จะทดสอบอะไร ยังไง ซึ่งได้จาก Requirement
 
+### เอกสารที่สำคัญ
 
-### ตัวอย่าง
+- RUD [Requirement Understanding Document]
+- Testing Feasibility Report
+- Automation Feasibility Report
 
 
 
@@ -43,11 +66,16 @@ sequenceDiagram
 
 ### อธิบาย
 
+- วางแผนการทดสอบ
+- ดูจากปัจจัยต่างๆ 
+  - กลยุทธการทดสอบในองค์กรนั้นๆ เช่น ภาษาที่ใช้เขียนซอฟแวร์ แนวทางการเขียนซอฟ์แวร์ เราจะได้วางแผนถูกว่าจะต้อง ใช้ภาษาอะไรทดสอบ
+  - ความเสี่ยงในการทดสอบ เนื่องจาก บางทีอาจจะทดสอบไม่ได้ทั้งหมดทุกส่วน เนื่องด้วยความปลอดภัย เราก็ ต้องวางแผนงานทดสอบว่า สามารถทดสอบได้แค่ไหน
 
+### เอกสารสำคัญ
 
-### ตัวอย่าง
-
-
+- Test Plan Document
+- Risk Mitigation Document
+- Test Estimation Document
 
 
 
@@ -56,6 +84,10 @@ sequenceDiagram
 ### อธิบาย
 
 ขั้นตอนทำความเข้าใจในสิ่งที่จะทดสอบ
+
+### เอกสารสำคัญ
+
+- Test Condition Document
 
 ### ตัวอย่าง
 
@@ -89,9 +121,11 @@ sequenceDiagram
 
   - เช่น Requirement บอก สามารถใช้งานพร้อมกันหลายเครื่อง &rarr; ***กี่เครื่อง ?***
 
-### ตัวอย่าง
+### เอกสารสำคัญ
 
--
+- Detailed Test Condition Document
+- Requirement Traceability Metrics
+- Test Coverage Report
 
 
 
@@ -99,11 +133,13 @@ sequenceDiagram
 
 ### อธิบาย 
 
+- เริ่มขั้นตอนการเขียน Test Case จริงเพื่อจะนำไปใช้งาน หลังจากนั้น แปลงเป็น Test Script และใส่ Test Data (Mockup Data)
+
+### เอกสารสำคัญ
+
 - Test Case
 - Test Script
 - Test Data
-
-
 
 
 
@@ -111,7 +147,14 @@ sequenceDiagram
 
 ### อธิบาย
 
+- เริ่มขั้นตอนการทดสอบจริง จึงต้องมีการทำ Test Case มาทำงาน
 
+### เอกสารสำคัญ
+
+- Test Execution Report
+- Defect Report
+- Test Log and Defect Log
+- Updated Requirement Traceability metric
 
 
 
@@ -119,7 +162,13 @@ sequenceDiagram
 
 ### อธิบาย
 
+- สรุปผลการทดสอบ
 
+### เอกสารสำคัญ
+
+- Updated Traceability Metrics
+- Test Summary Report
+- Updated Risk Management Report
 
 
 
@@ -127,22 +176,27 @@ sequenceDiagram
 
 ### อธิบาย
 
-เป็นเหมือนเอกสารรับรองว่า การทดสอบ software นั้นสมบูรณ์แบบแล้ว ส่งมอบงาน **เสร็จสมบูรณ์**
+- เป็นเหมือนเอกสารรับรองว่า การทดสอบ software นั้นสมบูรณ์แบบแล้ว ส่งมอบงาน **เสร็จสมบูรณ์**
 
+### เอกสารสำคัญ
 
+- Lesson Learnt Document
+- Test Matrics
+- Test Closure Report
 
 
 
 # Life Cycle of a software bug
 
 ```flow
-start=>start: New
+start=>start: Start
+unconfirm=>operation: UNCONFIRMED
 assignd=>operation: ASSIGNED
 resloved=>operation: RESLOVED
 verrified=>operation: VERIFIED
 end=>end: Closed
 
-start->assignd->resloved->verrified->end
+start->unconfirm->assignd->resloved->verrified->end
 ```
 
 
@@ -270,4 +324,3 @@ start->test_exe->tpr_raise->tpr_tracked->retested->problem
 problem(no)->tpr_closed
 problem(yes)->test_exe
 ```
-
