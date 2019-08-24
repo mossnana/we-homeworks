@@ -1,18 +1,18 @@
-//
-//  ViewController.swift
-//  MyCameraApp
-//
-//  Created by ANT Man on 24/8/2562 BE.
-//  Copyright © 2562 ANT Man. All rights reserved.
-//
-
 import UIKit
 import MobileCoreServices
 
 class MyCameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
+    
     var imgController :UIImagePickerController?
     var isNewImg = false
+    
+    @IBOutlet weak var imageArea: UIImageView!
+    @IBOutlet weak var btnShare: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        btnShare.isHidden = false
+    }
     
     @IBAction func camaraOpen(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
@@ -45,19 +45,6 @@ class MyCameraViewController: UIViewController, UINavigationControllerDelegate, 
         }
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        let theImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
-        imageArea.image = theImage
-        btnShare.isHidden = false
-    }
-    
-    @IBOutlet weak var imageArea: UIImageView!
-    @IBOutlet weak var btnShare: UIButton!
     @IBAction func share(_ sender: Any) {
         let actItem: [AnyObject]? = [imageArea.image!]
         let actContrller = UIActivityViewController(activityItems: actItem!, applicationActivities: nil)
@@ -80,15 +67,15 @@ class MyCameraViewController: UIViewController, UINavigationControllerDelegate, 
         self.present(actContrller, animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if imageArea.image == nil {
-            btnShare.isHidden = true
-        } else {
-            btnShare.isHidden = false
-        }
-        
-        // Do any additional setup after loading the view.
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        let theImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        imageArea.image = theImage
+        btnShare.isHidden = false
     }
 }
 
