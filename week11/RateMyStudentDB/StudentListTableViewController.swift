@@ -9,21 +9,48 @@
 import UIKit
 import CoreData
 
-class StudentListTableViewController: UITableViewController {
-    
+class StudentListTableViewController: UITableViewController, UISearchResultsUpdating{
     var myStudentList: [Student] = []
+    
+    var myFilteredStudentList : [Student] = []
+    let mySearchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        mySearchController.searchResultsUpdater = self
+        mySearchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = mySearchController.searchBar
+    }
+    
+    func filterStudentContentForSearchText(searchText: String){
+        myFilteredStudentList = myStudentList.filter({ myStudent in
+            return myStudent.studentName.contains(searchText)
+        })
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterStudentContentForSearchText(searchText: mySearchController.searchBar.text!)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "rateSegue" {
+            let indexPath = self.tableView.indexPathForSelectedRow!
+            let myRateStudentVC = segue.destination as! RateStudentViewController
+            var dataSender: Student
+            if ((mySearchController.isActive) &&
+                (mySearchController.searchBar.text != "")){
+                dataSender = myFilteredStudentList[indexPath.row]
+            } else {
+                dataSender = myStudentList[indexPath.row]
+            }
+            myRateStudentVC.theStudent = dataSender
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         myStudentList.removeAll()
@@ -96,20 +123,30 @@ class StudentListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return myStudentList.count
+        if ((mySearchController.isActive) &&
+            (mySearchController.searchBar.text != "")){
+            return myFilteredStudentList.count
+        } else {
+            return myStudentList.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentTableViewCell
-        
-        cell.stuNameOutlet.text = myStudentList[indexPath.row].studentName
-        cell.stuContentOutlet.text = "\(myStudentList[indexPath.row].studentRatingScore)"
-        if myStudentList[indexPath.row].studentRatingScore > 50 {
+        let myStudent: Student
+        if mySearchController.isActive && mySearchController.searchBar.text != "" {
+            myStudent = myFilteredStudentList[indexPath.row]
+        } else {
+            myStudent = myStudentList[indexPath.row]
+        }
+        cell.stuNameOutlet.text = myStudent.studentName
+        cell.stuContentOutlet.text = "\(myStudent.studentRatingScore)"
+        if myStudent.studentRatingScore > 50 {
             cell.stuContentOutlet.textColor = UIColor(hue: 150, saturation: 99, brightness: 28, alpha: 1)
         } else {
             cell.stuContentOutlet.textColor = UIColor(hue: 360, saturation: 99, brightness: 28, alpha: 1)
         }
-        cell.stuPictureOutlet.image = myStudentList[indexPath.row].studentImage
+        cell.stuPictureOutlet.image = myStudent.studentImage
         return cell
     }
 

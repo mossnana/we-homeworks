@@ -85,6 +85,7 @@
                                     <outlet property="stuNameOutlet" destination="eSU-D2-rfC" id="vCs-xN-sFW"/>
                                     <outlet property="stuPictureOutlet" destination="8Nb-tH-cg1" id="Lhn-CE-uDt"/>
                                     <outlet property="timeOutlet" destination="h2z-S4-oqO" id="eoD-HQ-Htd"/>
+                                    <segue destination="7so-sr-M6P" kind="show" identifier="rateSegue" id="AVH-fA-Z1y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -94,6 +95,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="oTD-X1-faE">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="gMQ-PJ-0Ln">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2zC-Im-XCw">
+                                <rect key="frame" x="16" y="7" width="115" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="About Developer"/>
+                                <connections>
+                                    <segue destination="nCL-a2-jDH" kind="show" id="hhg-MU-R4j"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add New Score" style="plain" id="YPt-Il-J1d">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="cV2-lH-9hL"/>
@@ -105,6 +117,35 @@
             </objects>
             <point key="canvasLocation" x="-772.5" y="-316.90140845070425"/>
         </scene>
+        <!--About Developer View Controller-->
+        <scene sceneID="eqg-8b-uwc">
+            <objects>
+                <viewController id="nCL-a2-jDH" customClass="AboutDeveloperViewController" customModule="RateMyStudentDB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6WS-zM-yfH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dwS-gv-gl6">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wUD-0e-NYc"/>
+                    </view>
+                    <connections>
+                        <outlet property="myWebView" destination="dwS-gv-gl6" id="upK-To-rSa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kw1-bG-wZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-18.75" y="-944.36619718309862"/>
+        </scene>
         <!--Rate Student View Controller-->
         <scene sceneID="CdF-gE-p4C">
             <objects>
@@ -112,13 +153,76 @@
                     <view key="view" contentMode="scaleToFill" id="Q4n-fe-DLh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEO-Vl-Fyt">
+                                <rect key="frame" x="16" y="73" width="127" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phi-zI-KVr">
+                                <rect key="frame" x="16" y="109" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfJ-xf-OFU">
+                                <rect key="frame" x="262" y="73" width="42" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UL2-9n-HBI">
+                                <rect key="frame" x="16" y="499" width="288" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetScoreMethod" destination="7so-sr-M6P" eventType="touchUpInside" id="ta3-ht-ucU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSO-0C-npM">
+                                <rect key="frame" x="164" y="456" width="140" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="-"/>
+                                <connections>
+                                    <action selector="minusScoreMethod" destination="7so-sr-M6P" eventType="touchUpInside" id="HGL-on-oSS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUp-Wg-GjD">
+                                <rect key="frame" x="16" y="456" width="140" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="addScoreMethod" destination="7so-sr-M6P" eventType="touchUpInside" id="ZD6-Jz-Xl6"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4iw-Mb-K5n">
+                                <rect key="frame" x="16" y="147" width="288" height="288"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="lzZ-XV-FRw"/>
                     </view>
+                    <connections>
+                        <outlet property="imgView" destination="4iw-Mb-K5n" id="foQ-0s-0oX"/>
+                        <outlet property="lblName" destination="Phi-zI-KVr" id="aUb-Ds-I8L"/>
+                        <outlet property="lblRatingScore" destination="HfJ-xf-OFU" id="CQv-ea-QFg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJC-lw-MTz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="947.82608695652186" y="-648.21428571428567"/>
+            <point key="canvasLocation" x="946.875" y="-648.5915492957746"/>
         </scene>
         <!--Add Student View Controller-->
         <scene sceneID="tne-QT-ifu">

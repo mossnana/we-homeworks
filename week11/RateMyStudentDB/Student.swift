@@ -13,6 +13,12 @@ class Student: NSObject {
     var studentRatingScore: Int
     var studentImage: UIImage
     
+    override init() {
+        self.studentName = ""
+        self.studentRatingScore = 0
+        self.studentImage = UIImage()
+    }
+    
     init(studentName: String, studentRatingScore: Int, studentImage: UIImage) {
         self.studentName = studentName
         self.studentRatingScore = studentRatingScore

@@ -17,6 +17,8 @@
 		F14AD9372323866C00EA1240 /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14AD9362323866C00EA1240 /* AddStudentViewController.swift */; };
 		F14AD939232386BB00EA1240 /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14AD938232386BB00EA1240 /* StudentTableViewCell.swift */; };
 		F14AD93B23239A3000EA1240 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14AD93A23239A3000EA1240 /* Student.swift */; };
+		F1E3E07A232CC90100FFB5DE /* AboutDeveloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E3E079232CC90100FFB5DE /* AboutDeveloperViewController.swift */; };
+		F1E3E07D232CCC6500FFB5DE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E3E07C232CCC6500FFB5DE /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		F14AD9362323866C00EA1240 /* AddStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
 		F14AD938232386BB00EA1240 /* StudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
 		F14AD93A23239A3000EA1240 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		F1E3E079232CC90100FFB5DE /* AboutDeveloperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDeveloperViewController.swift; sourceTree = "<group>"; };
+		F1E3E07C232CCC6500FFB5DE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E3E07D232CCC6500FFB5DE /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +55,7 @@
 			children = (
 				F14AD91E2323845D00EA1240 /* RateMyStudentDB */,
 				F14AD91D2323845D00EA1240 /* Products */,
+				F1E3E07B232CCC6500FFB5DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +70,7 @@
 		F14AD91E2323845D00EA1240 /* RateMyStudentDB */ = {
 			isa = PBXGroup;
 			children = (
+				F1E3E079232CC90100FFB5DE /* AboutDeveloperViewController.swift */,
 				F14AD91F2323845D00EA1240 /* AppDelegate.swift */,
 				F14AD9212323845D00EA1240 /* RateStudentViewController.swift */,
 				F14AD9232323845D00EA1240 /* Main.storyboard */,
@@ -77,6 +84,14 @@
 				F14AD93A23239A3000EA1240 /* Student.swift */,
 			);
 			path = RateMyStudentDB;
+			sourceTree = "<group>";
+		};
+		F1E3E07B232CCC6500FFB5DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1E3E07C232CCC6500FFB5DE /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +170,7 @@
 				F14AD9352323864E00EA1240 /* StudentListTableViewController.swift in Sources */,
 				F14AD9222323845D00EA1240 /* RateStudentViewController.swift in Sources */,
 				F14AD9202323845D00EA1240 /* AppDelegate.swift in Sources */,
+				F1E3E07A232CC90100FFB5DE /* AboutDeveloperViewController.swift in Sources */,
 				F14AD93B23239A3000EA1240 /* Student.swift in Sources */,
 				F14AD939232386BB00EA1240 /* StudentTableViewCell.swift in Sources */,
 			);
