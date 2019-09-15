@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="we_testing_grade_list">
+        <field name="name">Grade Calculator</field>
+        <field name="model">we.grade</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="stu_name"/>
+                <field name="stu_point"/>
+                <field name="stu_grade"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="we_testing_grade_form">
+        <field name="name">Grade Calculator</field>
+        <field name="model">we.grade</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="stu_name"/>
+                        <field name="stu_point"/>
+                        <field name="stu_grade"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_we_grade" model="ir.actions.act_window">
+        <field name="name">Grade Calculator</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">we.grade</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="we_testing_grade_list"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_we_grade"
+    name="Grade Calculate"
+    action="action_we_grade"
+    sequence="1"/>
+</odoo>
