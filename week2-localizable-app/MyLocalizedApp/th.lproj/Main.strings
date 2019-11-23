@@ -1,0 +1,16 @@
+// แปล UI Object มาแปลที่นี่
+
+/* Class = "UILabel"; text = "Comments & Suggestions"; ObjectID = "997-cB-LIA"; */
+"997-cB-LIA.text" = "มีอะไรจะแนะนำไหมจ๊ะ";
+
+/* Class = "UILabel"; text = "Contact Number"; ObjectID = "UbY-rk-Nx6"; */
+"UbY-rk-Nx6.text" = "รายชื่อจ้าาา";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "VDK-tC-TQ3"; */
+"VDK-tC-TQ3.text" = "ฉายา";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "hef-Of-daI"; */
+"hef-Of-daI.normalTitle" = "กดสิ รออะไรอยู่";
+
+/* New Label ที่เพิ่มขึ้นมา */
+"Xdd-E3-Pym.text" = "ลาเบลที่สร้างขึ้นมาใหม่";

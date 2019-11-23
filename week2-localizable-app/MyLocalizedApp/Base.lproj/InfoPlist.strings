@@ -1,0 +1,10 @@
+/* 
+  Info.plist.strings
+  MyLocalizedApp
+
+  Created by AntMan7 on 23/11/2562 BE.
+  Copyright © 2562 AntX. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "AppWar";
+"NSHumanReadableCopyright" = "2654";
